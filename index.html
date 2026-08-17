@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffe5ec, #ffb3c6);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #4a4a4a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            z-index: 1;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #ff4d6d;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        .timer-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #c9184a;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        #countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff4d6d;
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+            width: 100%;
+            box-sizing: border-box;
+            letter-spacing: 0.5px;
+        }
+        .heart {
+            position: absolute;
+            color: #ff758f;
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0;
+            bottom: -20px;
+            z-index: 0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-105vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seni Çok Seviyorum ❤️</h1>
+        <div class="timer-title">O güzel andan beri:</div>
+        <div id="countdown">Hesaplanıyor...</div>
+    </div>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createHeart, 300);
+        const startDate = new Date(2026, 3, 9, 16, 0, 0); 
+        function updateTimer() {
+            const now = new Date();
+            const difference = now - startDate;
+            if (difference < 0) {
+                document.getElementById('countdown').innerHTML = " ";
+                return;
+            }
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            document.getElementById('countdown').innerHTML = 
+                `${days} Gün, ${hours} Saat, ${minutes} Dakika, ${seconds} Saniye`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
+
